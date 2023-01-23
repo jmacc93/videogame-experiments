@@ -4,6 +4,8 @@ I'll (hopefully) be doing this for the next few months (probably until about Jun
 
 Anyone can use anything I put here. You don't even need to attribute me. Its cool man. But if you *do* want to attribute me, then that's very nice of you. I also have a [donation page here](https://www.paypal.com/donate/?business=KJCNCAX9ARVZQ&no_recurring=0&currency_code=USD) if you really, *really* like what I'm doing here. And, I also have a [patreon page here](https://www.patreon.com/user?u=83778845) with (almost) literally nothing on it
 
+I'm primarily going to be using Godot engine because I like the idea of learning it, and its free :)
+
 Here's some mechanics that I want to try out (there are more that I don't have listed). Hopefully I can get through everything I add to this list in the next 4 months, or however long:
 
 - [ ] View movement based jumping control (eg: rotate view up while jumping to jump higher, etc)
@@ -19,3 +21,7 @@ Here's some mechanics that I want to try out (there are more that I don't have l
 - [ ] Guided / weakly-informed procedural generation and single-seed game worlds
 
 - [ ] Push, pull, and drag tools as alternative to grappeling hook mechanics
+
+- [ ] Free object equivalent to falling sand simulation
+
+- [ ] A first-person version of a punching / fighting game mechanic
