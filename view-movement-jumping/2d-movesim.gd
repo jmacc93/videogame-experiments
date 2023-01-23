@@ -5,7 +5,9 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-export var gravity_rate := 10.0
+export var gravity_rate := 50.0
+export var max_speed := 300.0
+export var min_friction_speed := 20.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
