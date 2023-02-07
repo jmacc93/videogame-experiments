@@ -10,18 +10,40 @@ Here's some mechanics that I want to try out (there are more that I don't have l
 
 - [ ] View movement based jumping control (eg: rotate view up while jumping to jump higher, etc)
   - [ ] 3d
-  - [ ] 2d
+  - [ ] 2d <- working on
 
-- [ ] Contextual movement models
+- [ ] Other misc movement mechanics, that may also have been done before
+  - [ ] Fast falling: like double jumping but downward
+  - [ ] Crouch-jumping
+  - [ ] Turn-around jumping: the old flash game Money Seize used this, 3d mario games used this (?), probably others
+
+- [ ] Jump-only movement: moving by making short hops that feel like regular walking / running with view bob
+
+- [ ] Jumpcasting (parabolic curve casting to colliding geometry) to adjust jumps to always land safely in 2d/3d platformer
+
+- [ ] Contextual movement mechanics
   - [ ] Ledge grabbing using raycasts to arbitrary geometries
   - [ ] Shimmying around objects
+  - [ ] Clinging onto nearby objects
+
+- [ ] Push, pull, and drag tools as alternative to grappeling hook mechanics
 
 - [ ] Player-equivalent NPCs in simulated world (eg: computer controlled players in a fake MMO)
 
 - [ ] Guided / weakly-informed procedural generation and single-seed game worlds
 
-- [ ] Push, pull, and drag tools as alternative to grappeling hook mechanics
-
 - [ ] Free object equivalent to falling sand simulation
 
 - [ ] A first-person version of a punching / fighting game mechanic
+
+- [ ] "Flight simulator"
+  - [ ] Huge object procedurally generated world, so there are large objects you're flying around and through
+  - [ ] Not physically accurate simulated lift, drag, etc that feels good for arcadey movement, etc
+  - [ ] Interesting, and enjoyable to use movement mechanics:
+    - [ ] Forward acceleration, airbrakes, boosted forward acceleration
+    - [ ] Side-to-side boosting / dashing, air-hops, etc
+    - [ ] Ground bouncing mechanic
+    - [ ] Short range teleportation, and long-range-teleporation as a mechanic
+    - [ ] Wing-retraction for free rotation despite air resistance, drag, etc
+    - [ ] Flipping around / 180 rotation
+  - [ ] Weapons?
