@@ -20,3 +20,12 @@ Vector3 move_and_slide_with_snap(linear_velocity, snap, up_direction, stop_on_sl
 
 The `snap` vector is apparently like a ray projected from the surface (?) of an object that, if it touches anything, you snap to that thing
 
+---
+
+To draw an arbitrary line inside a `Node2D` use:
+```
+func _draw():
+    draw_line(from, to, color)
+```
+Then somewhere else use `update()` to re-call `_draw`
+
