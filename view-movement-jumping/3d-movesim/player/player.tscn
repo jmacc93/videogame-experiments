@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://3d-movesim/player/dropBehavior3D1.gd" type="Script" id=1]
+[ext_resource path="res://3d-movesim/speedometer.gd" type="Script" id=2]
+[ext_resource path="res://3d-movesim/player/player3D.gd" type="Script" id=3]
+[ext_resource path="res://3d-movesim/player/slideBehavior3D1.gd" type="Script" id=4]
+[ext_resource path="res://3d-movesim/player/walkBehavior3D1.gd" type="Script" id=5]
+[ext_resource path="res://3d-movesim/player/cameraCroucher.gd" type="Script" id=6]
+[ext_resource path="res://3d-movesim/player/jumpBehavior3D1.gd" type="Script" id=7]
+[ext_resource path="res://3d-movesim/player/activateBehavior.gd" type="Script" id=8]
+
+[sub_resource type="CylinderShape" id=10]
+height = 2.40034
+radius = 0.75
+
+[sub_resource type="CapsuleMesh" id=4]
+
+[node name="player" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06698, 0 )
+collision_mask = 2
+script = ExtResource( 3 )
+gravity_rate = 1.0
+draw_velocity = true
+draw_movement_axes = true
+
+[node name="walkBehavior1" type="Node" parent="."]
+script = ExtResource( 5 )
+can_always_walk = true
+move_rate = 26.185
+fric_mult = 1
+walk_friction = 0.05
+no_walk_friction = 0.4
+
+[node name="jumpBehavior3D1" type="Node" parent="walkBehavior1"]
+script = ExtResource( 7 )
+jump_mouse_mult = 0.3
+jump_mouse_walk_mult = 0.3
+jump_force = 25.216
+jump_forward_force = 10.124
+debug_draw_mouse_magnitude = true
+
+[node name="slideBehavior3D1" type="Node" parent="walkBehavior1"]
+script = ExtResource( 4 )
+
+[node name="dropBehavior3D1" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="cameraCroucher" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.851406, -0.440183 )
+script = ExtResource( 6 )
+
+[node name="crouchPoint" type="Spatial" parent="cameraCroucher"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.682122, 0 )
+
+[node name="Camera" type="Camera" parent="cameraCroucher"]
+current = true
+far = 100021.0
+
+[node name="debugDrawPoint" type="Spatial" parent="cameraCroucher/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.335434, -0.0858445, -1.45945 )
+
+[node name="speedometer" type="Label3D" parent="cameraCroucher/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.195612, -0.371535, -1.46591 )
+modulate = Color( 0.0431373, 0.258824, 0.996078, 1 )
+script = ExtResource( 2 )
+
+[node name="debugLabel" type="Label3D" parent="cameraCroucher/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.202559, -0.390988, -1.21743 )
+
+[node name="activateRaycast" type="RayCast" parent="cameraCroucher/Camera"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 8.9407e-08 )
+visible = false
+enabled = true
+cast_to = Vector3( 0, -3, 0 )
+collision_mask = 15
+script = ExtResource( 8 )
+
+[node name="bodyCollider" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0, -0.0856633, 0 )
+shape = SubResource( 10 )
+
+[node name="bodyMesh" type="MeshInstance" parent="."]
+transform = Transform( 0.849292, 0, 0, 0, -3.71237e-08, 0.849292, 0, -0.849292, -3.71237e-08, 0, -0.320894, 0 )
+visible = false
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")

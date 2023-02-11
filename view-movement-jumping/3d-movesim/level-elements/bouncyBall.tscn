@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+bounce = 0.88
+
+[sub_resource type="SphereShape" id=2]
+
+[node name="Spatial" type="RigidBody"]
+collision_layer = 8
+collision_mask = 3
+physics_material_override = SubResource( 1 )
+gravity_scale = 3.0
+continuous_cd = true
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="CSGSphere" type="CSGSphere" parent="."]
+radial_segments = 20
+rings = 11

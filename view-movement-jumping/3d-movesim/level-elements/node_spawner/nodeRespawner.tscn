@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://3d-movesim/level-elements/node_spawner/nodeRespawner.gd" type="Script" id=1]
+
+[node name="nodeRespawner" type="Spatial"]
+script = ExtResource( 1 )

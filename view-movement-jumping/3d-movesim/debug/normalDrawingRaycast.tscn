@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://3d-movesim/debug/normalDrawer.gd" type="Script" id=1]
+
+[node name="RayCast" type="RayCast"]
+transform = Transform( 1, 0, 0, 0, 0.902758, -0.430149, 0, 0.430149, 0.902758, -3.05176e-05, 22.1651, -241.381 )
+enabled = true
+cast_to = Vector3( 0, -10, 0 )
+collision_mask = 2
+script = ExtResource( 1 )
