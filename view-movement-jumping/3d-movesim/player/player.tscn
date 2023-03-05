@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://3d-movesim/player/dropBehavior3D1.gd" type="Script" id=1]
 [ext_resource path="res://3d-movesim/speedometer.gd" type="Script" id=2]
@@ -8,12 +8,16 @@
 [ext_resource path="res://3d-movesim/player/cameraCroucher.gd" type="Script" id=6]
 [ext_resource path="res://3d-movesim/player/jumpBehavior3D1.gd" type="Script" id=7]
 [ext_resource path="res://3d-movesim/player/activateBehavior.gd" type="Script" id=8]
+[ext_resource path="res://3d-movesim/player/ledgeGrabBehavior3D1.gd" type="Script" id=9]
 
 [sub_resource type="CylinderShape" id=10]
 height = 2.40034
 radius = 0.75
 
 [sub_resource type="CapsuleMesh" id=4]
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 1, 2.70292, 1 )
 
 [node name="player" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06698, 0 )
@@ -23,27 +27,42 @@ gravity_rate = 1.0
 draw_velocity = true
 draw_movement_axes = true
 
+[node name="ledgeGrabBehavior3D1" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.348, 0.875, -0.413 )
+script = ExtResource( 9 )
+
+[node name="upperCast" type="RayCast" parent="ledgeGrabBehavior3D1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.471563, 0 )
+enabled = true
+cast_to = Vector3( 0, 0, -3 )
+collision_mask = 2
+
+[node name="lowerCast" type="RayCast" parent="ledgeGrabBehavior3D1"]
+enabled = true
+cast_to = Vector3( 0, 0, -3 )
+collision_mask = 2
+
 [node name="walkBehavior1" type="Node" parent="."]
 script = ExtResource( 5 )
 can_always_walk = true
-move_rate = 26.185
-fric_mult = 1
-walk_friction = 0.05
-no_walk_friction = 0.4
+air_control_walk_mag = 7.79
 
 [node name="jumpBehavior3D1" type="Node" parent="walkBehavior1"]
 script = ExtResource( 7 )
+autohop = true
 jump_mouse_mult = 0.3
 jump_mouse_walk_mult = 0.3
-jump_force = 25.216
+jump_force = 16.193
 jump_forward_force = 10.124
-debug_draw_mouse_magnitude = true
+wall_jump_force = 19.594
+wall_jump_upward_mod = 0.747
 
 [node name="slideBehavior3D1" type="Node" parent="walkBehavior1"]
 script = ExtResource( 4 )
 
 [node name="dropBehavior3D1" type="Node" parent="."]
 script = ExtResource( 1 )
+max_drop_count = 3
 
 [node name="cameraCroucher" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.851406, -0.440183 )
@@ -84,3 +103,33 @@ transform = Transform( 0.849292, 0, 0, 0, -3.71237e-08, 0.849292, 0, -0.849292, 
 visible = false
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
+
+[node name="rightArmArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.884378, 0.196481, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="rightArmArea"]
+transform = Transform( 0.316406, 0, 0, 0, 0.316406, 0, 0, 0, 0.316406, -0.172626, 0, 0 )
+shape = SubResource( 11 )
+
+[node name="RayCast" type="RayCast" parent="rightArmArea"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5.96046e-08, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+collision_mask = 2
+
+[node name="leftArmArea" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.527907, 0.196481, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="leftArmArea"]
+transform = Transform( 0.316406, 0, 0, 0, 0.316406, 0, 0, 0, 0.316406, -0.172626, 0, 0 )
+shape = SubResource( 11 )
+
+[node name="RayCast" type="RayCast" parent="leftArmArea"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+collision_mask = 2

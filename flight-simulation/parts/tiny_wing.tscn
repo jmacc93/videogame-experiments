@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://centerOfLiftBehavior.tscn" type="PackedScene" id=1]
+[ext_resource path="res://blender_import/tiny_wing.glb" type="PackedScene" id=2]
+
+[sub_resource type="ConcavePolygonShape" id=1]
+data = PoolVector3Array( -0.471, 0, 0.2498, 0.0702, 0, -0.431, -0.1422, 0, -0.431, -0.471, 0, 0.2498, 0.2628, 0, 0.2498, 0.0702, 0, -0.431, -0.4759, 0.0455, 0.2513, 0.0654, 0.0075, -0.4296, 0.2579, 0.0455, 0.2513, -0.4759, 0.0455, 0.2513, -0.147, 0.0075, -0.4296, 0.0654, 0.0075, -0.4296, 0.0702, 0, -0.431, -0.147, 0.0075, -0.4296, -0.1422, 0, -0.431, 0.0702, 0, -0.431, 0.0654, 0.0075, -0.4296, -0.147, 0.0075, -0.4296, -0.471, 0, 0.2498, 0.2579, 0.0455, 0.2513, 0.2628, 0, 0.2498, -0.471, 0, 0.2498, -0.4759, 0.0455, 0.2513, 0.2579, 0.0455, 0.2513, 0.2628, 0, 0.2498, 0.0654, 0.0075, -0.4296, 0.0702, 0, -0.431, 0.2628, 0, 0.2498, 0.2579, 0.0455, 0.2513, 0.0654, 0.0075, -0.4296, -0.1422, 0, -0.431, -0.4759, 0.0455, 0.2513, -0.471, 0, 0.2498, -0.1422, 0, -0.431, -0.147, 0.0075, -0.4296, -0.4759, 0.0455, 0.2513 )
+
+[node name="tiny_wing" instance=ExtResource( 2 )]
+
+[node name="centerOfLiftBehavior" parent="." index="0" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0357852, 0, -0.225362 )
+draw_debug_lines = true
+
+[node name="debugPoint" type="Spatial" parent="centerOfLiftBehavior" index="0"]
+
+[node name="tinyWingCollisionShape" type="CollisionShape" parent="." index="2"]
+shape = SubResource( 1 )

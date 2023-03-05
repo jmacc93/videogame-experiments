@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://centerOfLiftBehavior.tscn" type="PackedScene" id=1]
+[ext_resource path="res://blender_import/flap.glb" type="PackedScene" id=2]
+
+[sub_resource type="ConcavePolygonShape" id=1]
+data = PoolVector3Array( -0.0669, -0.0771, 0.3965, -0.0669, 0.0771, -0.4707, -0.0669, 0.0771, 0.3965, -0.0669, -0.0771, 0.3965, -0.0669, -0.0771, -0.4707, -0.0669, 0.0771, -0.4707, -0.0669, -0.0771, -0.4707, 0.3012, 0.0315, -0.4707, -0.0669, 0.0771, -0.4707, -0.0669, -0.0771, -0.4707, 0.3012, -0.0315, -0.4707, 0.3012, 0.0315, -0.4707, 0.3012, -0.0315, -0.4707, 0.3012, 0.0315, 0.3965, 0.3012, 0.0315, -0.4707, 0.3012, -0.0315, -0.4707, 0.3012, -0.0315, 0.3965, 0.3012, 0.0315, 0.3965, 0.3012, -0.0315, 0.3965, -0.0669, 0.0771, 0.3965, 0.3012, 0.0315, 0.3965, 0.3012, -0.0315, 0.3965, -0.0669, -0.0771, 0.3965, -0.0669, 0.0771, 0.3965, -0.0669, -0.0771, -0.4707, 0.3012, -0.0315, 0.3965, 0.3012, -0.0315, -0.4707, -0.0669, -0.0771, -0.4707, -0.0669, -0.0771, 0.3965, 0.3012, -0.0315, 0.3965, 0.3012, 0.0315, -0.4707, -0.0669, 0.0771, 0.3965, -0.0669, 0.0771, -0.4707, 0.3012, 0.0315, -0.4707, 0.3012, 0.0315, 0.3965, -0.0669, 0.0771, 0.3965 )
+
+[node name="flap" instance=ExtResource( 2 )]
+
+[node name="centerOfLiftBehavior" parent="." index="0" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202417, 0, -0.0691249 )
+
+[node name="debugPoint" type="Spatial" parent="centerOfLiftBehavior" index="0"]
+
+[node name="flapCollisionShape" type="CollisionShape" parent="." index="2"]
+shape = SubResource( 1 )

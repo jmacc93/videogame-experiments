@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://captureMouseBehavior.gd" type="Script" id=1]
+[ext_resource path="res://mouseRotationBehavior.gd" type="Script" id=2]
+
+[node name="cameraRotationFrame" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0224085, 0.505129 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 4.71377, -14.5806 )
+current = true
+far = 10000.0
+
+[node name="horizontalMouseRotationBehavior" type="Node" parent="."]
+script = ExtResource( 2 )
+rotate_speed = 12
+max_angle = 180
+
+[node name="verticalMouseRotationBehavior2" type="Node" parent="."]
+script = ExtResource( 2 )
+mouse_axis = 1
+rotation_multiplier_selection = 0
+rotate_speed = -12
+max_angle = 90
+
+[node name="captureMouseBehavior" type="Node" parent="."]
+script = ExtResource( 1 )

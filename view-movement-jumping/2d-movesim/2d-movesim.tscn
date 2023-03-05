@@ -1,23 +1,15 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://2d-movesim/2dwalkBehavior1.gd" type="Script" id=1]
+[ext_resource path="res://2d-movesim/frictionBehavior1.gd" type="Script" id=1]
 [ext_resource path="res://2d-movesim/2d-movesim.gd" type="Script" id=2]
-[ext_resource path="res://assets/foot-1.png" type="Texture" id=3]
-[ext_resource path="res://assets/body-2.png" type="Texture" id=4]
+[ext_resource path="res://2d-movesim/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://2d-movesim/jumpOnlyBehavior1.gd" type="Script" id=4]
 [ext_resource path="res://2d-movesim/teleportFloor.gd" type="Script" id=5]
 [ext_resource path="res://assets/ground-like-1.png" type="Texture" id=6]
-[ext_resource path="res://2d-movesim/Player2D.gd" type="Script" id=7]
-[ext_resource path="res://assets/red-circle-1.png" type="Texture" id=8]
 
 [sub_resource type="Curve" id=11]
 max_value = 2.0
 _data = [ Vector2( 0, 0.119632 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 18.0278
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 11, 10 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 544, 10 )
@@ -35,53 +27,17 @@ min_friction_speed = 50.0
 after_jump_gravity_mult = SubResource( 11 )
 after_jump_gravity_time_max = 0.1
 
-[node name="Player" type="KinematicBody2D" parent="."]
-collision_mask = 0
-script = ExtResource( 7 )
-gravity_rate = 9.279
+[node name="jumpOnlyPlayer" type="Node" parent="."]
 
-[node name="debugPoint" type="Node2D" parent="Player"]
-position = Vector2( 0, -47 )
+[node name="Player" parent="jumpOnlyPlayer" instance=ExtResource( 3 )]
 
-[node name="Sprite" type="Sprite" parent="Player/debugPoint"]
-texture = ExtResource( 8 )
+[node name="jumpOnlyBehavior1" type="Node" parent="jumpOnlyPlayer/Player"]
+script = ExtResource( 4 )
+jump_up_mult = 6.0
+move_jump_mult = 3.0
 
-[node name="walkBehavior1" type="Node" parent="Player"]
+[node name="frictionBehavior1" type="Node" parent="jumpOnlyPlayer/Player"]
 script = ExtResource( 1 )
-jump_force = 3.567
-move_rate = 34.866
-air_control_walk_mag = 10
-auto_friction = 1.0
-jump_mouse_mult = 1.0
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
-
-[node name="BodyCollider" type="CollisionShape2D" parent="Player"]
-shape = SubResource( 1 )
-
-[node name="BodySprite" type="Sprite" parent="Player"]
-position = Vector2( -1, -5 )
-scale = Vector2( 2.75, 2.75 )
-texture = ExtResource( 4 )
-
-[node name="RightFootSprite" type="Sprite" parent="Player"]
-position = Vector2( 6, 13 )
-scale = Vector2( 2.75, 2.75 )
-texture = ExtResource( 3 )
-
-[node name="LeftFootSprite" type="Sprite" parent="Player"]
-position = Vector2( -7, 13 )
-scale = Vector2( -2.75, 2.75 )
-texture = ExtResource( 3 )
-
-[node name="groundTouchArea" type="Area2D" parent="Player"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="FeetCollider" type="CollisionShape2D" parent="Player/groundTouchArea"]
-position = Vector2( 0, 11 )
-shape = SubResource( 7 )
 
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2( 0, 78 )

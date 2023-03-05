@@ -78,7 +78,6 @@ func _physics_process(delta):
   
   if Input.is_action_pressed("move_left"):
     var aniso_walk_mult = aniso_walk_mult_profile.interpolate(velocity.x + 1)
-    print(aniso_walk_mult)
     if right_leg_area.get_overlapping_bodies().size() > 0 or can_always_walk:
       velocity += Vector2(-move_rate*walk_multiplier*aniso_walk_mult, 0)
     elif feet_area.get_overlapping_bodies().size() > 0 :

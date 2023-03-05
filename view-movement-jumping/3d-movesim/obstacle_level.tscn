@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://blender-import/obstacle-level-structure.tscn" type="PackedScene" id=1]
 [ext_resource path="res://3d-movesim/player/player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://3d-movesim/level-elements/node_spawner/nodeRespawner.tscn" type="PackedScene" id=13]
 [ext_resource path="res://3d-movesim/testButton.gd" type="Script" id=14]
 [ext_resource path="res://3d-movesim/rotateContinuously.gd" type="Script" id=15]
+[ext_resource path="res://3d-movesim/abilities/kickAbility.tscn" type="PackedScene" id=16]
+[ext_resource path="res://3d-movesim/moveToNodeOnReady.gd" type="Script" id=17]
 
 [sub_resource type="CylinderShape" id=1]
 height = 1.09741
@@ -29,34 +31,60 @@ extents = Vector3( 16.0884, 1, 7.3986 )
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 34.7533, 1, 14.2921 )
 
+[sub_resource type="SpatialMaterial" id=6]
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_billboard_mode = 3
+params_billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 6 )
+
 [node name="Node" type="Node"]
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.814571, 0.431397, -0.387776, 0.424763, 0.0116508, 0.90523, 0.395031, -0.902087, -0.173751, 96.2016, 143.437, 0 )
+transform = Transform( 0.851665, 0.430516, -0.298868, 0.344407, -0.0299157, 0.938344, 0.395031, -0.902087, -0.173751, 96.2016, 143.437, 0 )
 light_energy = 0.556
 light_indirect_energy = 1.178
 light_specular = 0.856
 shadow_enabled = true
-shadow_bias = 2.1
+shadow_bias = 2.545
+directional_shadow_mode = 1
 directional_shadow_max_distance = 8192.0
 
-[node name="Control" type="Control" parent="."]
+[node name="Node" type="Node" parent="DirectionalLight"]
+script = ExtResource( 15 )
+axis = Vector3( 0, 0, 1 )
+rate = 0.001
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+transform = Transform( -0.99287, 0, 0.119201, 0, 1, 0, -0.119201, 0, -0.99287, 205.762, 67.1491, -236.479 )
+draw_velocity = false
+draw_movement_axes = false
+
+[node name="Control" type="Control" parent="player"]
 margin_right = 76.0
 margin_bottom = 40.0
 
-[node name="Camera2D" type="Camera2D" parent="Control"]
+[node name="Camera2D" type="Camera2D" parent="player/Control"]
 current = true
 
-[node name="Control" type="Control" parent="Control"]
+[node name="Control" type="Control" parent="player/Control"]
 margin_left = 440.0
 margin_top = 238.0
 margin_right = 481.0
 margin_bottom = 278.0
 
-[node name="player" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125.155, 50.5959, -249.36 )
-draw_velocity = false
-draw_movement_axes = false
+[node name="kickAbility" parent="player" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70293, 0, -0.563324 )
+power = 0.258
+
+[node name="moveToNodeOnReady2" type="Node" parent="player/kickAbility"]
+script = ExtResource( 17 )
+new_parent_search_string = "player >> Camera"
 
 [node name="obstacle-level-structure2" parent="." instance=ExtResource( 1 )]
 
@@ -197,3 +225,16 @@ depth = 28.8208
 script = ExtResource( 15 )
 axis = Vector3( 0, 0, 1 )
 rate = 4.0
+
+[node name="CPUParticles" type="CPUParticles" parent="."]
+transform = Transform( 1.88722, 0, 0, 0, 1.88722, 0, 0, 0, 1.88722, 51.6184, 50.9398, -320.186 )
+draw_order = 1
+mesh = SubResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3( 0, 1, 0 )
+spread = 54.0
+scale_amount = 0.25
+scale_amount_random = 0.39
+hue_variation = 1.0
+hue_variation_random = 1.0

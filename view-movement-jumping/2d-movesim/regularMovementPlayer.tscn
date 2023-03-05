@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://2d-movesim/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://2d-movesim/Player2D.gd" type="Script" id=2]
+[ext_resource path="res://2d-movesim/jumpBehavior1.gd" type="Script" id=3]
+[ext_resource path="res://2d-movesim/2dwalkBehavior1.gd" type="Script" id=4]
+
+[node name="regularMovementPlayer" type="Node"]
+
+[node name="Player" type="KinematicBody2D" parent="." instance=ExtResource( 1 )]
+collision_mask = 0
+script = ExtResource( 2 )
+gravity_rate = 9.279
+
+[node name="walkBehavior1" type="Node" parent="Player"]
+script = ExtResource( 4 )
+
+[node name="jumpBehavior1" type="Node" parent="Player/walkBehavior1"]
+script = ExtResource( 3 )

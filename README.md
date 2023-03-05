@@ -8,16 +8,16 @@ I'm primarily going to be using Godot engine because I like the idea of learning
 
 Here's some mechanics that I want to try out (there are more that I don't have listed). Hopefully I can get through everything I add to this list in the next 4 months, or however long:
 
-- [ ] View movement based jumping control (eg: rotate view up while jumping to jump higher, etc)
-  - [ ] 3d
-  - [ ] 2d <- working on
+- [X] View movement based jumping control (eg: rotate view up while jumping to jump higher, etc)
+  - [X] 3d [Probably done. Outcome was good-feeling movement]
+  - [X] 2d [Probably done with this as well. Feels good]
 
-- [ ] Other misc movement mechanics, that may also have been done before
-  - [ ] Fast falling: like double jumping but downward
-  - [ ] Crouch-jumping
-  - [ ] Turn-around jumping: the old flash game Money Seize used this, 3d mario games used this (?), probably others
+- [X] Other misc movement mechanics, that may also have been done before
+  - [X] Fast falling: like double jumping but downward [Easy to implement and feels great]
+  - [X] Crouch-jumping [Quite difficult to get the timing right, but easy to implement]
+  - [X] Turn-around jumping: the old flash game Money Seize used this, 3d mario games used this (?), probably others [Works well and easily implemented]
 
-- [ ] Jump-only movement: moving by making short hops that feel like regular walking / running with view bob
+- [X] Jump-only movement: moving by making short hops that feel like regular walking / running with view bob [This is such a cute way to move around. It was really easy to implement too]
 
 - [ ] Jumpcasting (parabolic curve casting to colliding geometry) to adjust jumps to always land safely in 2d/3d platformer
 

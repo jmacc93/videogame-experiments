@@ -7,42 +7,27 @@ var walking = false
 var last_walking_dir : float
 
 export var can_always_walk = false
-export var can_always_jump = false
-export var autohop = false
 
-export(float, 0, 100) var jump_force = 18
-export(float, 0, 400) var jump_forward_force = 6
-
-export(float, 0, 200) var move_rate = 26
+export(float, 0, 200) var move_rate = 40
 export(float, 0, 3) var backward_walk_mult = 1.0
 
-export var air_control_speed = 10
-export var air_control_walk_mag = 30
+export var air_control_walk_mag = 8.0
 
-export var fric_mult = 15
-export var auto_friction = 0.1
-
-export var jump_mouse_mult = 0.1
-export var jump_mouse_side_mult = 3
+export var fric_mult = 10
+export var auto_friction = 0.4
 
 var lib = preload('res://lib.gd')
 
-var last_mouse_movement : Vector2
-
 var frames_touching_ground = 0
-export var friction_begin_frames = 3
+export var friction_begin_frames = 5
 
 func lint(a, b, u):
   return a + (b - a) * u
 
-var did_jump = false
-
 var x_dir = Vector2(1, 0)
 var y_dir = Vector2(0, -1)
 
-func _input(event):
-    if event is InputEventMouseMotion:
-        last_mouse_movement = event.relative
+var walk_vec
 
 func set_debug_point(vec: Vector2):
   var circle : Sprite = $"../debugPoint/Sprite"
@@ -52,7 +37,7 @@ func set_debug_point(vec: Vector2):
 func _process(delta):
   var draw_scale = 0.1
   
-  var walk_vec = 0
+  walk_vec = 0
   set_debug_point(Vector2(0, 0))
   
   if Input.is_action_pressed("move_left"):
@@ -61,18 +46,6 @@ func _process(delta):
   if Input.is_action_pressed("move_right"):
     walk_vec +=  move_rate * 10
   
-  var autohop_condition = autohop and player.velocity.y < 0.1
-  if Input.is_action_pressed("jump") and ((player.touching_ground and (not did_jump or autohop_condition)) or can_always_jump):
-    player.velocity += Vector2(0, -jump_force * 100 * (delta if can_always_jump else 1))
-    player.velocity += Vector2(jump_forward_force * 100 * delta * (1/4 if can_always_jump else 1), 0)
-    var mouse_contribution = Vector2(last_mouse_movement.x * jump_mouse_side_mult, last_mouse_movement.y)
-    print(mouse_contribution * jump_mouse_mult)
-    player.velocity += mouse_contribution * jump_mouse_mult
-    did_jump = true
-    frames_touching_ground = 0
-  
-  if not Input.is_action_pressed("jump"):
-    did_jump = false
   
   walking = abs(walk_vec) > 0.001
 
